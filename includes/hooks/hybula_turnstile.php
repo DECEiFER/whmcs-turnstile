@@ -21,9 +21,9 @@ if (! defined('WHMCS')) {
 }
 
 if (! isset($_SESSION['adminid'])) {
-    if (! empty($_POST) && (! isset($_SESSION['uid']) && hybulaTurnstileExcludeLogin)) {
+    if (hybulaTurnstileEnabled && ! empty($_POST) && ! (isset($_SESSION['uid']) && hybulaTurnstileExcludeLogin)) {
         $pageFile = basename($_SERVER['SCRIPT_NAME'], '.php');
-        if (hybulaTurnstileEnabled &&
+        if (
             (
                 ($pageFile == 'index' && isset($_POST['username']) && isset($_POST['password']) && in_array('login', hybulaTurnstileLocations)) ||
                 ($pageFile == 'register' && in_array('register', hybulaTurnstileLocations)) ||
